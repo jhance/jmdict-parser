@@ -11,9 +11,44 @@
 -- raw lists which are similar to association lists. This
 -- preserves the original order of the input.
 module Data.JMDict.XML.Parser
-where
+    (
+    Entry
+  , entryUniqueId
+  , entryKanjiElements
+  , entryReadingElements
+  , entrySenses
 
-import Debug.Trace
+  , KanjiElement
+  , kanjiInfo
+  , kanjiPriority
+
+  , ReadingElement
+  , readingPhrase
+  , readingNoKanji
+  , readingRestrictKanji
+  , readingInfo
+  , readingPriority
+
+  , Sense
+  , senseRestrictKanji
+  , senseRestrictReading
+  , sensePartOfSpeech
+  , senseRelated
+  , senseAntonym
+  , senseFields
+  , senseMisc
+  , senseInfo
+  , senseSources
+  , senseDialects
+  , senseGlosses
+
+  , LanguageSource
+  , sourceOrigin
+  , sourceLanguage
+  , sourceFull
+  , sourceWaseieigo
+  )
+where
 
 import           Control.Applicative hiding (many)
 import           Control.Monad
