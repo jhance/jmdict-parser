@@ -4,21 +4,19 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 
--- | A module that parses the XML in a very raw way. These types
--- are not intended to be used as anything but intermediate values.
---
--- For example, we do not store anything in maps, but instead in
--- raw lists which are similar to association lists. This
--- preserves the original order of the input.
 module Data.JMDict.XML.Parser
     (
-    Entry
+  -- * Core conduit
+    parseJMDict
+  -- * Types
+  , Entry
   , entryUniqueId
   , entryKanjiElements
   , entryReadingElements
   , entrySenses
 
   , KanjiElement
+  , kanjiPhrase
   , kanjiInfo
   , kanjiPriority
 
@@ -34,7 +32,7 @@ module Data.JMDict.XML.Parser
   , senseRestrictReading
   , sensePartOfSpeech
   , senseRelated
-  , senseAntonym
+  , senseAntonyms
   , senseFields
   , senseMisc
   , senseInfo
@@ -47,6 +45,10 @@ module Data.JMDict.XML.Parser
   , sourceLanguage
   , sourceFull
   , sourceWaseieigo
+
+  , Gloss
+  , glossDefinition
+  , glossLanguage
   )
 where
 
@@ -90,7 +92,7 @@ data Sense = Sense {
     , _senseRestrictReading :: [T.Text] -- ^ If null, unrestricted
     , _sensePartOfSpeech :: [T.Text]
     , _senseRelated :: [T.Text]
-    , _senseAntonym :: [T.Text]
+    , _senseAntonyms :: [T.Text]
     , _senseFields :: [T.Text]
     , _senseMisc :: [T.Text]
     , _senseInfo :: [T.Text]
